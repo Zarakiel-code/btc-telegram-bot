@@ -3,5 +3,3 @@ httpx
 pandas
 ta
 python-dotenv
-flask
-staypresent[prod]
