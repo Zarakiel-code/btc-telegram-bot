@@ -1,0 +1,7 @@
+python-telegram-bot[job-queue]
+httpx
+pandas
+ta
+python-dotenv
+flask
+staypresent[prod]

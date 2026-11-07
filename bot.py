@@ -7,8 +7,6 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Messa
 from api import get_btc_price, get_klines
 from indicators import cal_indicators
 from datetime import datetime, timezone
-from flask import Flask
-import threading
 
 """FIRST_CONFIG"""
 
@@ -18,15 +16,6 @@ TOKEN = os.getenv("BOT_TOKEN")
 ALERT_INTERVAL = 900
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-
-app_web = Flask(__name__)
-
-@app_web.route('/')
-def health_check():
-    return "Bot is alive", 200
-
-def run_web():
-    app_web.run(host='0.0.0.0', port=8000)
 
 """BOT_COMMANDS"""
 
@@ -167,7 +156,6 @@ async def reply_to_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         
 def main() -> None:
     
-    threading.Thread(target=run_web, daemon=True).start()
     app = ApplicationBuilder().token(TOKEN).build()
     
     app.add_handler(CommandHandler("start", start))
